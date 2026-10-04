@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checkout | Glow & Go</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <header class="header">
+        <div class="logo">Glow & Go</div>
+
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="index.html#cosmetics">Cosmetics</a>
+            <a href="index.html#bags">Bags</a>
+        </nav>
+    </header>
+
+    <main class="checkout-page">
+
+        <div class="checkout-container">
+
+            <h1>Checkout 🛍️</h1>
+            <p class="checkout-subtitle">Complete your order details</p>
+            <div class="order-summary">
+    <h2>Your Order 🛍️</h2>
+    <div id="checkoutItems"></div>
+
+    <div class="checkout-total">
+        Total: <strong id="checkoutTotal">Rs. 0</strong>
+    </div>
+</div>
+
+            <form class="checkout-form">
+
+                <div class="form-group">
+                    <label for="name">Full Name</label>
+                    <input
+                        type="text"
+                        id="name"
+                        placeholder="Enter your full name"
+                        required
+                    >
+                </div>
+
+                <div class="form-group">
+                    <label for="phone">Phone Number</label>
+                    <input
+                        type="tel"
+                        id="phone"
+                        placeholder="Enter your phone number"
+                        required
+                    >
+                </div>
+
+                <div class="form-group">
+                    <label for="address">Delivery Address</label>
+                    <textarea
+                        id="address"
+                        rows="4"
+                        placeholder="Enter your complete address"
+                        required
+                    ></textarea>
+                </div>
+
+                <div class="form-group">
+
+    <label for="payment">
+        Payment Method
+    </label>
+
+    <select id="payment" required>
+
+        <option value="">
+            Select payment method
+        </option>
+
+        <option value="cod">
+            Cash on Delivery
+        </option>
+
+        <option value="online">
+            Online Payment
+        </option>
+
+    </select>
+
+</div>
+
+                <button type="submit" class="place-order-button">
+                    Place Order
+                </button>
+
+            </form>
+
+        </div>
+
+    </main>
+
+
+    <script>
+    const checkoutForm = document.querySelector(".checkout-form");
+
+    checkoutForm.addEventListener("submit", (event) => {
+        event.preventDefault();
+
+ const orderNumber =
+    "GG-" + Math.floor(100000 + Math.random() * 900000);
+
+const cart =
+    JSON.parse(localStorage.getItem("glowAndGoCart")) || [];
+
+let total = 0;
+
+cart.forEach((item) => {
+    total += item.price * item.quantity;
+});
+
+localStorage.setItem(
+    "glowAndGoOrderNumber",
+    orderNumber
+);
+
+localStorage.setItem(
+    "glowAndGoOrderTotal",
+    total
+);
+
+localStorage.removeItem("glowAndGoCart");
+
+checkoutForm.reset();
+
+window.location.href = "success.html";
+    });
+</script>
+
+<script src="checkout.js"></script>
+
+
+</body>
+</html>
+
